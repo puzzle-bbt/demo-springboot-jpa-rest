@@ -8,21 +8,23 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("users")
 public class UserController {
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    UserCrudRepository userCrudRepository;
+    private final UserCrudRepository userCrudRepository;
 
-    @GetMapping("users")
+    public UserController(UserCrudRepository userCrudRepository) {
+        this.userCrudRepository = userCrudRepository;
+    }
+
+    @GetMapping
     public List<User> getAllUsers(@RequestParam(required = false) String email) {
         return (List<User>) userCrudRepository.findAll();
     }
@@ -33,7 +35,7 @@ public class UserController {
                             schema = @Schema(implementation = User.class))}),
             @ApiResponse(responseCode = "404", description = "Did not find a users with a specified ID.", content = @Content)
     })
-    @GetMapping("users/{id}")
+    @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable long id) {
         return userCrudRepository.findById(id);
     }

@@ -3,35 +3,47 @@ package ch.puzzle.demo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import ch.puzzle.demo.dto.ObjectiveDTO;
 import ch.puzzle.demo.model.Objective;
-import ch.puzzle.demo.repository.KeyResultCrudRepository;
-import ch.puzzle.demo.repository.ObjectiveCrudRepository;
+import ch.puzzle.demo.repository.ObjectiveService;
 
 @RestController
-@RequestMapping("api/objectives")
+@RequestMapping("objectives")
 public class ObjectiveController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectiveController.class);
 
-    @Autowired
-    ObjectiveCrudRepository objectiveCrudRepository;
-    @Autowired
-    KeyResultCrudRepository keyResultCrudRepository;
-
-    @GetMapping("")
-    public List<Objective> getAllObjectives() {
-        LOG.info("Get all objectives");
-        return (List<Objective>) objectiveCrudRepository.findAll();
+    private final ObjectiveService objectiveService;
+    public ObjectiveController(ObjectiveService objectiveService) {
+        this.objectiveService = objectiveService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping
+    public List<Objective> getAllObjectives() {
+        LOG.info("Get all objectives");
+        return (List<Objective>) objectiveService.getAllObjectives();
+    }
+
+    @GetMapping("/{id}")
     public Optional<Objective> getObjective(@PathVariable long id) {
         LOG.info("getAllObjectives with id '{}'", id);
-        return objectiveCrudRepository.findById(id);
+        return objectiveService.getObjectiveById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> createNewObjective(@RequestBody ObjectiveDTO objectiveDTO){
+        Objective savedObjective = objectiveService.saveObjective(objectiveDTO);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(savedObjective.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
