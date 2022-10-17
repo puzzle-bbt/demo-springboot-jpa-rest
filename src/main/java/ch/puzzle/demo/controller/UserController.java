@@ -37,4 +37,10 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable long id) {
         return userCrudRepository.findById(id);
     }
+
+    @PostMapping("users")
+    public User saveUser(@RequestBody User user) {
+        LOG.info("POST payload: {}", user);
+        return this.userCrudRepository.save(user);
+    }
 }
