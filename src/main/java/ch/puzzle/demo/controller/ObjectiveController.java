@@ -32,9 +32,13 @@ public class ObjectiveController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Objective> getObjective(@PathVariable long id) {
+    public ResponseEntity<Object> getObjective(@PathVariable long id) {
         LOG.info("getAllObjectives with id '{}'", id);
-        return objectiveService.getObjectiveById(id);
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(objectiveService.getObjectiveById(id));
+        } catch (BusinessException e) {
+            return ResponseEntity.status(e.code).body(e.getClientMessage());
+        }
     }
 
     @PostMapping

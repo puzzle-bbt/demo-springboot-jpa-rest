@@ -24,8 +24,8 @@ public class ObjectiveService {
     public Iterable<Objective> getAllObjectives() {
         return objectiveCrudRepository.findAll();
     }
-    public Optional<Objective> getObjectiveById(long id) {
-        return objectiveCrudRepository.findById(id);
+    public Objective getObjectiveById(long id) throws BusinessException {
+        return objectiveCrudRepository.findById(id).orElseThrow(() -> new BusinessException(404, "Objective not found"));
     }
     public Objective saveObjective(ObjectiveDTO objectiveDTO) throws BusinessException {
         User user = userCrudRepository.findById(objectiveDTO.createdById).orElseThrow(() -> new BusinessException(404, "User not found"));
