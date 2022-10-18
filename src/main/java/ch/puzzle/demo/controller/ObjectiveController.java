@@ -3,14 +3,14 @@ package ch.puzzle.demo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import ch.puzzle.demo.exception.BusinessException;
 import ch.puzzle.demo.dto.ObjectiveDTO;
 import ch.puzzle.demo.model.Objective;
 import ch.puzzle.demo.repository.ObjectiveService;
@@ -39,11 +39,10 @@ public class ObjectiveController {
 
     @PostMapping
     public ResponseEntity<Object> createNewObjective(@RequestBody ObjectiveDTO objectiveDTO){
-        Objective savedObjective = objectiveService.saveObjective(objectiveDTO);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedObjective.getId()).toUri();
-
-        return ResponseEntity.created(location).build();
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(objectiveService.saveObjective(objectiveDTO));
+        } catch (BusinessException e) {
+            return ResponseEntity.status(e.code).body(e.getClientMessage());
+        }
     }
 }
