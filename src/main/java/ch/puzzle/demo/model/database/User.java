@@ -1,4 +1,4 @@
-package ch.puzzle.demo.model;
+package ch.puzzle.demo.model.database;
 
 import lombok.*;
 
@@ -17,13 +17,16 @@ import javax.validation.constraints.Size;
 @Table(name = "person") // "user" table is not allowed in PostgreSQL
 public class User {
     private @Id @GeneratedValue Long id;
+
     @NotBlank
     @Size(min = 2, max = 20)
     private String firstname;
+
     @NotBlank
     @Size(min = 2, max = 20)
     private String lastname;
     private String email;
+
     @NotNull
     @Size(min = 0, max = 150)
     private Integer age;

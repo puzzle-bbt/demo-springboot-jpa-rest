@@ -1,4 +1,4 @@
-package ch.puzzle.demo.model;
+package ch.puzzle.demo.model.helper;
 
 public enum ResultType {
     PERCENT,

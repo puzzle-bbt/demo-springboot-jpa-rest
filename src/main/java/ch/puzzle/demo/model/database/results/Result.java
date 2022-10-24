@@ -1,28 +1,29 @@
-package ch.puzzle.demo.model.results;
+package ch.puzzle.demo.model.database.results;
 
-import ch.puzzle.demo.model.KeyResult;
-import ch.puzzle.demo.model.User;
+import ch.puzzle.demo.model.database.KeyResult;
+import ch.puzzle.demo.model.database.User;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 @MappedSuperclass
-public class Result {
+public abstract class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String name;
     private String description;
-
-//    @NotBlank
-//    private long value;
 
     @NotBlank
     @ManyToOne
@@ -35,5 +36,5 @@ public class Result {
     private KeyResult keyResult;
 
     @CreatedDate
-    private Date createdOn;
+    private LocalDateTime createdOn;
 }

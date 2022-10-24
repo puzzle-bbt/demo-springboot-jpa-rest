@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import ch.puzzle.demo.model.Objective;
+import ch.puzzle.demo.model.database.Objective;
 
 @Repository
 public interface ObjectiveCrudRepository extends CrudRepository<Objective, Long> {

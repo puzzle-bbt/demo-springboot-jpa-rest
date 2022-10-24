@@ -1,6 +1,6 @@
 package ch.puzzle.demo.controller;
 
-import ch.puzzle.demo.model.User;
+import ch.puzzle.demo.model.database.User;
 import ch.puzzle.demo.repository.UserCrudRepository;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,9 +18,11 @@ import java.util.Optional;
 @RequestMapping("api")
 public class UserController {
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+    private final UserCrudRepository userCrudRepository;
 
-    @Autowired
-    UserCrudRepository userCrudRepository;
+    public UserController(UserCrudRepository userCrudRepository) {
+        this.userCrudRepository = userCrudRepository;
+    }
 
     @GetMapping("users")
     public List<User> getAllUsers(@RequestParam(required = false) String email) {

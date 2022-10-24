@@ -1,4 +1,4 @@
-package ch.puzzle.demo.model;
+package ch.puzzle.demo.model.database;
 
 import java.util.Date;
 
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.*;
 
-@Data
 @Entity
 @Builder
 @AllArgsConstructor
@@ -21,7 +20,8 @@ import lombok.*;
 public class Objective {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+
     @NotBlank
     private String title;
 

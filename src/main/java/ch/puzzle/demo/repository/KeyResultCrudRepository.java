@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import ch.puzzle.demo.model.KeyResult;
+import ch.puzzle.demo.model.database.KeyResult;
 
 @Repository
 public interface KeyResultCrudRepository extends CrudRepository<KeyResult, Long> {

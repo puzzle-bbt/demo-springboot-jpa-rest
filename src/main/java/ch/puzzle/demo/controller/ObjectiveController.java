@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import ch.puzzle.demo.model.Objective;
+import ch.puzzle.demo.model.database.Objective;
 import ch.puzzle.demo.repository.KeyResultCrudRepository;
 import ch.puzzle.demo.repository.ObjectiveCrudRepository;
 
@@ -16,21 +16,24 @@ import ch.puzzle.demo.repository.ObjectiveCrudRepository;
 @RequestMapping("api/objectives")
 public class ObjectiveController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectiveController.class);
+    private final ObjectiveCrudRepository objectiveCrudRepository;
+    private final KeyResultCrudRepository keyResultCrudRepository;
 
     @Autowired
-    ObjectiveCrudRepository objectiveCrudRepository;
-    @Autowired
-    KeyResultCrudRepository keyResultCrudRepository;
+    public ObjectiveController(ObjectiveCrudRepository objectiveCrudRepository, KeyResultCrudRepository keyResultCrudRepository) {
+        this.objectiveCrudRepository = objectiveCrudRepository;
+        this.keyResultCrudRepository = keyResultCrudRepository;
+    }
 
     @GetMapping("")
     public List<Objective> getAllObjectives() {
         LOG.info("Get all objectives");
-        return (List<Objective>) objectiveCrudRepository.findAll();
+        return (List<Objective>) this.objectiveCrudRepository.findAll();
     }
 
     @GetMapping("{id}")
     public Optional<Objective> getObjective(@PathVariable long id) {
         LOG.info("getAllObjectives with id '{}'", id);
-        return objectiveCrudRepository.findById(id);
+        return this.objectiveCrudRepository.findById(id);
     }
 }
