@@ -5,6 +5,7 @@ import ch.puzzle.demo.model.dto.result.BooleanResultDto;
 import ch.puzzle.demo.repository.result.BooleanResultRepository;
 import ch.puzzle.demo.repository.KeyResultCrudRepository;
 import ch.puzzle.demo.repository.UserCrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,9 +14,12 @@ import java.util.List;
 @Service
 public class BooleanResultService extends ResultService {
     private final BooleanResultRepository booleanResultRepository;
+    private final UserService userService;
 
-    public BooleanResultService(UserCrudRepository userCrudRepository, KeyResultCrudRepository keyResultCrudRepository, BooleanResultRepository booleanResultRepository) {
-        super(userCrudRepository, keyResultCrudRepository);
+    @Autowired
+    public BooleanResultService(UserService userService, KeyResultCrudRepository keyResultCrudRepository, BooleanResultRepository booleanResultRepository) {
+        super(keyResultCrudRepository);
+        this.userService = userService;
         this.booleanResultRepository = booleanResultRepository;
     }
 
@@ -28,8 +32,8 @@ public class BooleanResultService extends ResultService {
                 .name(booleanResultDto.getName())
                 .description(booleanResultDto.getDescription())
                 .createdOn(LocalDateTime.now())
-                .createdBy(findUserWithId(1L))
-                .keyResult(findKeyResultWithId(1L))
+                .createdBy(this.userService.findUserWithId(1L)) //TODO: Replace with current authorized user
+                .keyResult(this.findKeyResultWithId(booleanResultDto.getKeyResult()))
                 .booleanValue(booleanResultDto.getBooleanValue())
                 .build();
     }

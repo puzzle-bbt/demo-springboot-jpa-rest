@@ -15,7 +15,7 @@ public abstract class ResultDto implements Serializable {
     private final String name;
 
     @NotNull
-    private final Integer keyResult;
+    private final Long keyResult;
 
     private final String description;
 }

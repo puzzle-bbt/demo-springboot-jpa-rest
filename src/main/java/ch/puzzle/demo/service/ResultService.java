@@ -12,23 +12,15 @@ import java.util.Optional;
 
 @Service
 public abstract class ResultService {
-    private final UserCrudRepository userCrudRepository;
     private final KeyResultCrudRepository keyResultCrudRepository;
 
     @Autowired
-    protected ResultService(UserCrudRepository userCrudRepository, KeyResultCrudRepository keyResultCrudRepository) {
-        this.userCrudRepository = userCrudRepository;
+    protected ResultService(KeyResultCrudRepository keyResultCrudRepository) {
         this.keyResultCrudRepository = keyResultCrudRepository;
-    }
-
-    protected User findUserWithId(Long id) {
-        Optional<User> userOptional = this.userCrudRepository.findById(id);
-        return  userOptional.orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     protected KeyResult findKeyResultWithId(Long keyResultId) {
         Optional<KeyResult> keyResultOptional = this.keyResultCrudRepository.findById(keyResultId);
         return keyResultOptional.orElseThrow(() -> new NotFoundException("KeyResult not found"));
     }
-
 }
