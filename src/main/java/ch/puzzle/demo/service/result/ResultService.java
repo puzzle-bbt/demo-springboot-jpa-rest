@@ -1,4 +1,4 @@
-package ch.puzzle.demo.service;
+package ch.puzzle.demo.service.result;
 
 import ch.puzzle.demo.model.database.KeyResult;
 import ch.puzzle.demo.model.database.User;

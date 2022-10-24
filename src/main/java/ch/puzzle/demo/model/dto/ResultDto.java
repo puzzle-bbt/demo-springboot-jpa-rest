@@ -1,4 +1,4 @@
-package ch.puzzle.demo.model.dto.result;
+package ch.puzzle.demo.model.dto;
 
 import lombok.Data;
 

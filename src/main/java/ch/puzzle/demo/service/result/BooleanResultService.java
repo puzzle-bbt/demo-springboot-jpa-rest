@@ -1,10 +1,10 @@
-package ch.puzzle.demo.service;
+package ch.puzzle.demo.service.result;
 
 import ch.puzzle.demo.model.database.results.BooleanResult;
 import ch.puzzle.demo.model.dto.result.BooleanResultDto;
 import ch.puzzle.demo.repository.result.BooleanResultRepository;
 import ch.puzzle.demo.repository.KeyResultCrudRepository;
-import ch.puzzle.demo.repository.UserCrudRepository;
+import ch.puzzle.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

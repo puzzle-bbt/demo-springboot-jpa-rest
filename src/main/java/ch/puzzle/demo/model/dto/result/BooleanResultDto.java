@@ -1,5 +1,6 @@
 package ch.puzzle.demo.model.dto.result;
 
+import ch.puzzle.demo.model.dto.ResultDto;
 import lombok.Builder;
 import lombok.Getter;
 
