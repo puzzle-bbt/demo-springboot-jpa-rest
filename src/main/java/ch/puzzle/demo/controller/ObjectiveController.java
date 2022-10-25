@@ -12,8 +12,10 @@ import ch.puzzle.demo.model.database.Objective;
 import ch.puzzle.demo.repository.KeyResultCrudRepository;
 import ch.puzzle.demo.repository.ObjectiveCrudRepository;
 
+import static ch.puzzle.demo.model.helper.UrlLibrary.BASIC_URL;
+
 @RestController
-@RequestMapping("api/objectives")
+@RequestMapping(BASIC_URL + "/objectives")
 public class ObjectiveController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectiveController.class);
     private final ObjectiveCrudRepository objectiveCrudRepository;

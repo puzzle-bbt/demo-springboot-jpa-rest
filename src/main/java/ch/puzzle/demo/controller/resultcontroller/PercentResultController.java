@@ -4,17 +4,15 @@ import ch.puzzle.demo.model.database.results.PercentResult;
 import ch.puzzle.demo.model.dto.result.PercentResultDto;
 import ch.puzzle.demo.service.result.PercentResultService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 import static ch.puzzle.demo.model.helper.UrlLibrary.*;
 
-@RestController(BASIC_URL)
+@RestController
+@RequestMapping(BASIC_URL)
 public class PercentResultController {
     private final PercentResultService percentResultService;
 
@@ -29,7 +27,7 @@ public class PercentResultController {
         return this.percentResultService.getAllPercentResults();
     }
 
-    @PostMapping(POST_PERCENTRESULTS)
+    @PostMapping(value = POST_PERCENTRESULT)
     @ResponseBody
     public PercentResult createPercentResult(@Valid PercentResultDto percentResultDto) {
         return this.percentResultService.createPercentResult(percentResultDto);

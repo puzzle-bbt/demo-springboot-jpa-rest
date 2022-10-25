@@ -12,6 +12,6 @@ public class UrlLibrary {
     public static final String POST_BOOLEANRESULT = "/booleanresult";
 
     public static final String GET_PERCENTRESULTS = "/percentresults";
-    public static final String POST_PERCENTRESULTS = "/percentresult";
+    public static final String POST_PERCENTRESULT = "/percentresult";
 
 }
