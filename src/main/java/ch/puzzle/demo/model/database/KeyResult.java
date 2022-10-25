@@ -7,11 +7,13 @@ import javax.validation.constraints.NotBlank;
 
 import ch.puzzle.demo.model.helper.ResultType;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class KeyResult {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,5 +35,6 @@ public class KeyResult {
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "KEYRESULT_PERSON_ID_FK"))
     private User createdBy;
 
+    @CreatedDate
     private Date createdOn;
 }

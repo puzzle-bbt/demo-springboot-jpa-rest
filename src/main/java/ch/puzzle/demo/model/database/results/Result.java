@@ -5,6 +5,7 @@ import ch.puzzle.demo.model.database.User;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @SuperBuilder
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +37,6 @@ public abstract class Result {
     @JoinColumn(name = "key_result_id", foreignKey = @ForeignKey(name = "KEY_RESULT_ID_FK"))
     private KeyResult keyResult;
 
-    @CreatedDate
+    @CreatedDate()
     private LocalDateTime createdOn;
 }
