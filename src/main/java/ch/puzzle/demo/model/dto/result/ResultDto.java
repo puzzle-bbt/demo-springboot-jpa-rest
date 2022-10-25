@@ -1,5 +1,6 @@
 package ch.puzzle.demo.model.dto.result;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @SuperBuilder
+@AllArgsConstructor
 public abstract class ResultDto implements Serializable {
     @NotBlank
     private final String name;

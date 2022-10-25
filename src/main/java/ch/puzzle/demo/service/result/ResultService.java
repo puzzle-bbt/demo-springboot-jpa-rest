@@ -1,9 +1,7 @@
-package ch.puzzle.demo.service;
+package ch.puzzle.demo.service.result;
 
 import ch.puzzle.demo.model.database.KeyResult;
-import ch.puzzle.demo.model.database.User;
 import ch.puzzle.demo.repository.KeyResultCrudRepository;
-import ch.puzzle.demo.repository.UserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;

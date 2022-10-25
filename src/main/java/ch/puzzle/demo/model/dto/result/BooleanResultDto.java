@@ -1,6 +1,6 @@
 package ch.puzzle.demo.model.dto.result;
 
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @SuperBuilder
 @Getter
+@EqualsAndHashCode(callSuper = true)
 public class BooleanResultDto extends ResultDto implements Serializable {
     private final Boolean booleanValue;
 }
