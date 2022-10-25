@@ -2,19 +2,17 @@ package ch.puzzle.demo;
 
 import ch.puzzle.demo.model.database.results.PercentResult;
 import ch.puzzle.demo.model.dto.result.PercentResultDto;
-import ch.puzzle.demo.service.PercentResultService;
+import ch.puzzle.demo.service.result.PercentResultService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.auditing.DateTimeProvider;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -67,9 +65,9 @@ class PercentResultServiceTests {
     }
 
     @Test
-    void getAllPercentResults(){
+    void getAllPercentResults() {
         List<PercentResult> allPercentResults = this.percentResultService.getAllPercentResults();
-        assertEquals(1, allPercentResults.size());
+        assertEquals(2, allPercentResults.size());
     }
 
     private LocalDateTime createLocalDateTime(String date) {
